@@ -1,0 +1,10 @@
+framework module distribute {
+  umbrella header "distribute.h"
+
+  export *
+  module * { export * }
+}
+
+module distribute.Swift {
+    header "distribute-Swift.h"
+}
