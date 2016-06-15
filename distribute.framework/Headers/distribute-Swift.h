@@ -185,14 +185,15 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// \param processingProfile the name of the processing profile in the Storie Developer Console you are using to process this file. If <code>nil
 /// </code> the default proessing profile will be used.
 ///
-/// \param thumbnailTime Override the default thumbnail time in the profile, leave nil if you want generation of thumbnails to be specified by the profile. Note: if the time is invalid e.g. greater than the duration of the video, the default thumbnail time specified in the profile will be used.
+/// \param thumbnailTime Override the default thumbnail time in the profile, use <code>DBL_MAX
+/// </code> if you want generation of thumbnails to be specified by the profile. Note: if the time is invalid e.g. greater than the duration of the video, the default thumbnail time specified in the profile will be used.
 ///
 /// \param error <code>UploadError.InvalidFilePath
 /// </code> if the <code>fileURL
 /// </code> parameter points to an invalid file path or the file does not exist
 - (BOOL)upload:(NSURL * _Nonnull)fileURL userInfo:(NSDictionary<NSString *, id> * _Nullable)userInfo callbackData:(NSDictionary<NSString *, NSString *> * _Nullable)callbackData pipelineName:(NSString * _Nullable)pipelineName thumbnailTime:(NSTimeInterval)thumbnailTime error:(NSError * _Nullable * _Null_unspecified)error;
 
-/// Objective-C Compatible function that retrieves the object's metadata, if using Swift rather use: videoInfo(videoID: String, success: Video -> Void) throws
+/// Objective-C Compatible function that retrieves the object's metadata, if using Swift rather use: videoInfo(videoID: String, success: Video -> Void) throws Since Objective-C does not support Swift value types, this method is here to allow for Objective-C to be able to access it. The functions access identical functionality.
 ///
 /// \param videoID Unique identifier for the video object
 ///
@@ -200,7 +201,7 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// </code> of values
 ///
 /// \param error An error is thrown if retrieving the video info has failed
-- (BOOL)videoInfo:(NSString * _Nonnull)videoID error:(NSError * _Nullable * _Null_unspecified)error success:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))success;
+- (BOOL)getVideoInfo:(NSString * _Nonnull)videoID error:(NSError * _Nullable * _Null_unspecified)error success:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))success;
 @end
 
 @class NSProgress;

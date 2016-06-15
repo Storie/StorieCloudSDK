@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name = "StorieCloudSDK"
-spec.version = "0.0.1"
+spec.version = "0.0.2"
 spec.summary = "Storie Cloud SDK"
 spec.homepage = "https://api.storie.com"
 spec.license      = { :type => 'Commercial', :text => 'Please refer to https://github.com/Storie/StorieCloudSDK/blob/master/LICENSE'}
