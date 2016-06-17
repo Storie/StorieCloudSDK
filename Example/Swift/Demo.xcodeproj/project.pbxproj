@@ -11,7 +11,6 @@
 		4C37C18F1CE5E34900A4D66A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37C18E1CE5E34900A4D66A /* ViewController.swift */; };
 		4C37C1941CE5E34900A4D66A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C37C1931CE5E34900A4D66A /* Assets.xcassets */; };
 		4C37C1971CE5E34900A4D66A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C37C1951CE5E34900A4D66A /* LaunchScreen.storyboard */; };
-		4CBB5E4B1D118FD4002E36A5 /* distribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CBB5E4A1D118FD4002E36A5 /* distribute.framework */; };
 		EAE1CFC4D7B92AFF0F0D4665 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E8421EFBADE20E11305E06 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,7 +21,6 @@
 		4C37C1931CE5E34900A4D66A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C37C1961CE5E34900A4D66A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C37C1981CE5E34900A4D66A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CBB5E4A1D118FD4002E36A5 /* distribute.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = distribute.framework; sourceTree = "<group>"; };
 		65ABC3444D7CDF0A3FC1FDFC /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		B5E8421EFBADE20E11305E06 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F295DDF7BD802D4CF4B2F828 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -34,7 +32,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE1CFC4D7B92AFF0F0D4665 /* Pods_Demo.framework in Frameworks */,
-				4CBB5E4B1D118FD4002E36A5 /* distribute.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +72,6 @@
 				4C37C1931CE5E34900A4D66A /* Assets.xcassets */,
 				4C37C1951CE5E34900A4D66A /* LaunchScreen.storyboard */,
 				4C37C1981CE5E34900A4D66A /* Info.plist */,
-				4CBB5E4A1D118FD4002E36A5 /* distribute.framework */,
 			);
 			path = Demo;
 			sourceTree = "<group>";

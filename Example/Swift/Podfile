@@ -10,16 +10,6 @@ target 'Demo' do
 
   # Pods for Demo
 #  pod 'distribute', :path => "../../"
-#pod 'StorieCloudSDK'
-
-    pod "Alamofire"
-    pod "SwiftyJSON"
-    pod  "Moya"
-    pod  "RxSwift"
-    pod "RxCocoa"
-    pod  "Moya/RxSwift"
-    pod  "CocoaLumberjack/Swift"
-    pod  "SwiftyBeaver"
-    pod  "FileMD5Hash"
+    pod "StorieCloudSDK"
 
 end
