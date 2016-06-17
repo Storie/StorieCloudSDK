@@ -1,0 +1,23 @@
+//
+//  Demo-Header.pch
+//  Demo
+//
+//  Created by Michael Gaylord on 2016/06/13.
+//  Copyright © 2016 Storie. All rights reserved.
+//
+
+#ifndef Demo_Header_pch
+#define Demo_Header_pch
+
+@import CocoaLumberjack;
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#if DEBUG
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+#endif
+
+#endif /* Demo_Header_pch */

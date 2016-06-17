@@ -17,7 +17,6 @@ spec.public_header_files = "distribute.framework/Headers/*.h"
 
 spec.dependency "Alamofire", "~> 3.3"
 spec.dependency "SwiftyJSON", "~> 2.3"
-spec.dependency "Moya", "~> 6.4"
 spec.dependency "RxSwift", "~> 2.0"
 spec.dependency "RxCocoa", "~> 2.0"
 spec.dependency "Moya/RxSwift", "~> 6.4"

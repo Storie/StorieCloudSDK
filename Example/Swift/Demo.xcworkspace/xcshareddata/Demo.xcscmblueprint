@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2710C3B9AB7C83E75268E65BF99B0D12C963C67C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2710C3B9AB7C83E75268E65BF99B0D12C963C67C" : 0,
+    "D2E4B4298218699438DFD332E847C7013A0A8AC7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E565A6E8-9DAA-4512-8BE0-BA9610DF5501",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2710C3B9AB7C83E75268E65BF99B0D12C963C67C" : "distribute\/",
+    "D2E4B4298218699438DFD332E847C7013A0A8AC7" : "storie-video-api-clients\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Demo\/Demo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Storie\/distribute.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2710C3B9AB7C83E75268E65BF99B0D12C963C67C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Storie\/storie-video-api-clients.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D2E4B4298218699438DFD332E847C7013A0A8AC7"
+    }
+  ]
+}
