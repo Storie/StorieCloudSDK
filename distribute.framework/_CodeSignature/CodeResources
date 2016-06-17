@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/distribute.swiftmodule/arm.swiftmodule</key>
 		<data>
-		yHl03kflDQFta5B1NiO/13VDdOQ=
+		nFXXt4JUTF+0wGDXhpjnbbsVeSY=
 		</data>
 		<key>Modules/distribute.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/distribute.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		bUjNIAXxndI3yWu7fbFPQDsPddQ=
+		sHsLgvupn/FxkqnFiPKMwKhi5Qs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -91,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yHl03kflDQFta5B1NiO/13VDdOQ=
+			nFXXt4JUTF+0wGDXhpjnbbsVeSY=
 			</data>
 			<key>hash2</key>
 			<data>
-			445jHAINHIaLEDZ2PHMQHwCsZODuoPQKtTpn4+7U0XE=
+			JTDDqqPdHdRWjENd9RLVyqSKhL3JcYCvDL0SikuAi00=
 			</data>
 		</dict>
 		<key>Modules/distribute.swiftmodule/arm64.swiftdoc</key>
@@ -113,11 +113,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bUjNIAXxndI3yWu7fbFPQDsPddQ=
+			sHsLgvupn/FxkqnFiPKMwKhi5Qs=
 			</data>
 			<key>hash2</key>
 			<data>
-			fbnLDtZ3sg+0wkm8IFEcr5BHjju6no+lew/qn7st61w=
+			uhOw5HvzOMrCGv4gyD2rDq4lNluz6I2+rihH1EyrJvc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
