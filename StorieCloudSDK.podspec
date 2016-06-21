@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name = "StorieCloudSDK"
-spec.version = "0.0.5"
+spec.version = "0.0.6"
 spec.summary = "Storie Cloud SDK"
 spec.homepage = "https://api.storie.com"
 spec.license      = { :type => 'Commercial', :text => 'Please refer to https://github.com/Storie/StorieCloudSDK/blob/master/LICENSE'}
@@ -19,7 +19,8 @@ spec.dependency "Alamofire", "~> 3.3"
 spec.dependency "SwiftyJSON", "~> 2.3"
 spec.dependency "RxSwift", "~> 2.0"
 spec.dependency "RxCocoa", "~> 2.0"
-spec.dependency "Moya/RxSwift", "~> 6.4"
+spec.dependency "Result", "~> 2.0"
+# spec.dependency "Moya/RxSwift", "~> 6.4"
 spec.dependency "SwiftyBeaver", "~> 0.5"
 spec.dependency "FileMD5Hash", "~> 2.0"
 

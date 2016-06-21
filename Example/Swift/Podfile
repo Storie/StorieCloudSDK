@@ -9,7 +9,7 @@ target 'Demo' do
   use_frameworks!
 
   # Pods for Demo
-#  pod 'distribute', :path => "../../"
-    pod "StorieCloudSDK"
-
+  pod "StorieCloudSDK", :path => "../../"
+#    pod "StorieCloudSDK"
+  pod "CocoaLumberjack/Swift"
 end

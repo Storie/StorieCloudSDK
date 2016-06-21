@@ -324,27 +324,7 @@
 				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"Alamofire\"",
-					"-framework",
-					"\"CocoaLumberjack\"",
-					"-framework",
-					"\"Moya\"",
-					"-framework",
-					"\"Result\"",
-					"-framework",
-					"\"RxCocoa\"",
-					"-framework",
-					"\"RxSwift\"",
-					"-framework",
-					"\"SwiftyBeaver\"",
-					"-framework",
-					"\"SwiftyJSON\"",
-					"-framework",
-					"\"distribute\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.storie.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -361,27 +341,7 @@
 				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"Alamofire\"",
-					"-framework",
-					"\"CocoaLumberjack\"",
-					"-framework",
-					"\"Moya\"",
-					"-framework",
-					"\"Result\"",
-					"-framework",
-					"\"RxCocoa\"",
-					"-framework",
-					"\"RxSwift\"",
-					"-framework",
-					"\"SwiftyBeaver\"",
-					"-framework",
-					"\"SwiftyJSON\"",
-					"-framework",
-					"\"distribute\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.storie.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
