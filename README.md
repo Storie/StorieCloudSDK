@@ -115,6 +115,39 @@ NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.
                error:&error];
 ```
 
+### Tracking upload progress
+
+There are two ways to inspect the progress of an upload. The first is by implement the `DistributorDelegate` protocol and assigning it to your `Distributor` instance.
+
+
+For more information about the callbacks you will receive via the `DistributorDelegate` visit: http://api.storie.com/docs/ios-sdk/Protocols/DistributorDelegate.html
+
+The second way is by registering `NSNotification` observers on `UploadNotifications`. For the available constants visit: http://api.storie.com/docs/ios-sdk/Structs/UploadNotifications.html
+
+
+In Objective-C, you will need to import:
+
+``` Objective-C
+#import <distribute/ObjcConstants.h>
+```
+
+You will then have access to the following notification names and constants, they are identical in functionality to those specified in the `UploadNotifications` struct in Swift:
+
+``` Objective-C
+extern NSString* const UploadNotificationUploadFailed;
+extern NSString* const UploadNotificationUploadInitializing;
+extern NSString* const UploadNotificationUploadProgress;
+extern NSString* const UploadNotificationUploadAllComplete;
+extern NSString* const UploadNotificationUploadComplete;
+extern NSString* const UploadNotificationUploadStarted;
+extern NSString* const UploadNotificationUploadResumed;
+extern NSString* const UploadNotificationUploadProgressKey;
+extern NSString* const UploadNotificationUploadTotalProgressKey;
+extern NSString* const UploadNotificationUploadErrorKey;
+extern NSString* const UploadNotificationUploadObjectKey;
+extern NSString* const UploadNotificationUploadCompletedResultsKey;
+extern NSString* const UploadNotificationUploadUserInfoKey;
+```
 
 ### Retrieving video file info:
 

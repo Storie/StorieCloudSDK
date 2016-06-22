@@ -167,7 +167,7 @@
         }
         __strong typeof(self) strongSelf = weakSelf;
         NSError *error;
-        [strongSelf.distributor videoInfo:text error:&error success:^(NSDictionary<NSString *,id> *result) {
+        [strongSelf.distributor getVideoInfo:text error:&error success:^(NSDictionary<NSString *,id> *result) {
             [strongSelf appendToLog:[NSString stringWithFormat:@"Video found: %@", result]];
         }];
         if (error) {
