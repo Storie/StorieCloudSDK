@@ -98,6 +98,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+enum LogLevel : NSInteger;
 @class NSURL;
 @protocol DistributorDelegate;
 
@@ -110,6 +111,22 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 ///
 /// \param apiKey The apiKey
 - (nullable instancetype)initWithApiKey:(NSString * _Nonnull)apiKey error:(NSError * _Nullable * _Null_unspecified)error OBJC_DESIGNATED_INITIALIZER;
+
+/// In order to target a different log level for your logs, use this function.
+///
+/// \param level Can be one of the following: <code>.Verbose
+/// </code>, <code>.Debug
+/// </code>, <code>.Info
+/// </code>, <code>.Warning
+/// </code>, <code>.Error
+/// </code> Default is <code>.Warning
+/// </code>
+- (void)setMinimumLogLevel:(enum LogLevel)level;
+
+/// Disable / Enable usage reporting. Storie collects usage logging information of this SDK in order to improve the product and debug potential issues remotely. By default this setting is enabled. Any data sent to our logging platform is not able to personally identify users.
+///
+/// \param enabled Disable or enable usage reporting.
+- (void)setUsageReportingEnabled:(BOOL)enabled;
 
 /// Delegate that provides callback functionality about upload statuses
 @property (nonatomic, weak) id <DistributorDelegate> _Nullable delegate;
@@ -182,7 +199,7 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// </code> map of <code>[String : String]
 /// </code> types.
 ///
-/// \param processingProfile the name of the processing profile in the Storie Developer Console you are using to process this file. If <code>nil
+/// \param serviceName the name of the service in the Storie Developer Console you are using to process this file. If <code>nil
 /// </code> the default proessing profile will be used.
 ///
 /// \param thumbnailTime Override the default thumbnail time in the profile, use <code>DBL_MAX
@@ -191,7 +208,7 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// \param error <code>UploadError.InvalidFilePath
 /// </code> if the <code>fileURL
 /// </code> parameter points to an invalid file path or the file does not exist
-- (BOOL)upload:(NSURL * _Nonnull)fileURL userInfo:(NSDictionary<NSString *, id> * _Nullable)userInfo callbackData:(NSDictionary<NSString *, NSString *> * _Nullable)callbackData pipelineName:(NSString * _Nullable)pipelineName thumbnailTime:(NSTimeInterval)thumbnailTime error:(NSError * _Nullable * _Null_unspecified)error;
+- (BOOL)upload:(NSURL * _Nonnull)fileURL userInfo:(NSDictionary<NSString *, id> * _Nullable)userInfo callbackData:(NSDictionary<NSString *, NSString *> * _Nullable)callbackData serviceName:(NSString * _Nullable)serviceName thumbnailTime:(NSTimeInterval)thumbnailTime error:(NSError * _Nullable * _Null_unspecified)error;
 
 /// Objective-C Compatible function that retrieves the object's metadata, if using Swift rather use: videoInfo(videoID: String, success: Video -> Void) throws Since Objective-C does not support Swift value types, this method is here to allow for Objective-C to be able to access it. The functions access identical functionality.
 ///
@@ -272,6 +289,26 @@ SWIFT_PROTOCOL("_TtP10distribute19DistributorDelegate_")
 /// When all current uploads have finished uploading and there are no pending uploads remaining.
 - (void)uploadsCompleted:(NSArray<UploadCompleteResult *> * _Nonnull)results;
 @end
+
+
+/// Used to indicate the minimum logging level for the framework
+typedef SWIFT_ENUM(NSInteger, LogLevel) {
+
+/// Verbose log level
+  LogLevelVerbose = 0,
+
+/// Debug log level
+  LogLevelDebug = 1,
+
+/// Info log level
+  LogLevelInfo = 2,
+
+/// Warning log level
+  LogLevelWarning = 3,
+
+/// Error log level
+  LogLevelError = 4,
+};
 
 
 @interface NSDate (SWIFT_EXTENSION(distribute))

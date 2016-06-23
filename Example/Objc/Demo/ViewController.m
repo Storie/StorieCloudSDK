@@ -149,7 +149,7 @@
     [_distributor upload:fileURL
                 userInfo:@{@"localVideoID" : @"12345677"}
             callbackData:@{@"serverID" : @"4lkj344"}
-            pipelineName:nil
+            serviceName:nil
            thumbnailTime:0.3
                    error:&error];
 }

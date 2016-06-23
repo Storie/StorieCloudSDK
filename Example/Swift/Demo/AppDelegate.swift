@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DDLogInfo("Application did finish launching")
         
-        self.distributor = try? Distributor(apiKey: "uwa3jintauwui8f4zd27gr9q2595r2")
+        //TODO: ADD YOUR API KEY TO THIS LINE
+        self.distributor = try? Distributor(apiKey: "")
         distributor?.initializeUploads()
 
         let viewController = ViewController(distributor: distributor!)

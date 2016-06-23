@@ -33,7 +33,8 @@
     
     NSError *error;
     
-    self.distributor = [[Distributor alloc] initWithApiKey:@"uwa3jintauwui8f4zd27gr9q2595r2" error:&error];
+    //TODO: Add your API KEY to this function call below
+    self.distributor = [[Distributor alloc] initWithApiKey:@"" error:&error];
     if (error) {
         DDLogError(@"%@ Unable to create distributor due to: %@", error.localizedDescription, error.localizedFailureReason);
     }

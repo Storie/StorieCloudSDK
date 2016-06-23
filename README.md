@@ -68,7 +68,7 @@ Add this near the top of your `AppDelegate.m` to be able to use Storie's Distrib
 @import distribute;
 ```
 
-Then add a property to your `AppDelegate.m` to store your `Distributor` object:
+Then add a property to your `AppDelegate.m` to store your `Distributor` object as a property:
 
 ``` Objective-C
 @property (nonatomic, strong) Distributor *distributor;
