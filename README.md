@@ -96,7 +96,8 @@ In Swift:
 let videoFileURL = = NSURL(fileURLWithPath: "file://path_to_my_file/to_upload.mp4")
 do {
     try distributor.upload(videoFileURL, userInfo: ["localObjectID" : "12345566"],
-                                      callbackData: ["serverObjectID" : "1233454"])
+                                     callbackData: ["serverObjectID" : "1233454"]
+                                      serviceName: @"DEFAULT")
 } catch let error {
     NSLog("Error uploading video at URL: \(fileURL) : \(error)")
 }
@@ -110,7 +111,7 @@ NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.
 [distributor upload:videoFileURL
             userInfo:@{@"localObjectID" : @"12345677"}
         callbackData:@{@"serverObjectID" : @"12345677"}
-        pipelineName: @"DEFAULT"
+        serviceName: @"DEFAULT"
         thumbnailTime:0.3
                error:&error];
 ```
