@@ -8,7 +8,6 @@
 
 import UIKit
 import distribute
-import CocoaLumberjack
 import AVFoundation
 import MediaPlayer
 import MobileCoreServices
@@ -129,7 +128,7 @@ class ViewController: UIViewController {
             try distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: ["storyID" : "1233454"])
             view.setNeedsLayout()
         } catch let error {
-            DDLogError("Error uploading video at URL: \(fileURL) : \(error)")
+            print("Error uploading video at URL: \(fileURL) : \(error)")
         }
     }
     
@@ -190,7 +189,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         guard let url = videoURL else {
             return
         }
-        DDLogDebug("URL to video: \(url)")
+        print("URL to video: \(url)")
         upload(url)
     }
     

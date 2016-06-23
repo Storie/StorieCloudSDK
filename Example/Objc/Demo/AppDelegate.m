@@ -25,18 +25,14 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [[DDTTYLogger sharedInstance] setColorsEnabled:true];
-    
-    DDLogInfo(@"Application did finishing launching.");
+    NSLog(@"Application did finishing launching.");
     
     NSError *error;
     
     //TODO: Add your API KEY to this function call below
     self.distributor = [[Distributor alloc] initWithApiKey:@"" error:&error];
     if (error) {
-        DDLogError(@"%@ Unable to create distributor due to: %@", error.localizedDescription, error.localizedFailureReason);
+        NSLog(@"%@ Unable to create distributor due to: %@", error.localizedDescription, error.localizedFailureReason);
     }
     
     [self.distributor initializeUploads];
@@ -51,10 +47,8 @@
 
 - (void) application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier
    completionHandler:(void (^)())completionHandler {
-    
-    DDLogInfo(@"Application did receive events about background URL session: %@", identifier);
+
     if (application.applicationState == UIApplicationStateActive) {
-        DDLogInfo(@"Application is in the foreground so ignore.");
         return;
     }
     [self.distributor handleEventsForBackgroundSession:identifier completionHandler:completionHandler];

@@ -8,8 +8,6 @@
 
 import UIKit
 import distribute
-import CocoaLumberjack
-import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,12 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     final func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        defaultDebugLevel = .Debug
-        DDLog.addLogger(DDASLLogger.sharedInstance())
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
-        DDTTYLogger.sharedInstance().colorsEnabled = true
-        
-        DDLogInfo("Application did finish launching")
+        print("Application did finish launching")
         
         //TODO: ADD YOUR API KEY TO THIS LINE
         self.distributor = try? Distributor(apiKey: "")
@@ -44,10 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     final func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: Void->()) {
-        DDLogInfo("**************** Application did receive receive events about background URL session: \(identifier) ****************")
-        
         if application.applicationState == UIApplicationState.Active {
-            DDLogInfo("Application is in the foreground, so ignore.")
+            print("Application is in the foreground, so ignore.")
             return
         }
         distributor?.handleEventsForBackgroundSession(identifier, completionHandler: completionHandler)

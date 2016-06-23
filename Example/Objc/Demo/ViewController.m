@@ -207,7 +207,7 @@
         }
     }
     NSURL *url = (NSURL *)urlObject;
-    DDLogDebug(@"URL to video: %@", url);
+    NSLog(@"URL to video: %@", url);
     [self upload:url];
     [self dismissViewControllerAnimated:true completion:nil];
 }

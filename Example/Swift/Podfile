@@ -10,6 +10,4 @@ target 'Demo' do
 
   # Pods for Demo
   pod "StorieCloudSDK", :path => "../../"
-#    pod "StorieCloudSDK"
-  pod "CocoaLumberjack/Swift"
 end

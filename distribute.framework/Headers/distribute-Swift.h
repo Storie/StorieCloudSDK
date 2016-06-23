@@ -119,9 +119,18 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// </code>, <code>.Info
 /// </code>, <code>.Warning
 /// </code>, <code>.Error
-/// </code> Default is <code>.Warning
+/// </code> Default is <code>.Info
 /// </code>
 - (void)setMinimumLogLevel:(enum LogLevel)level;
+
+/// Provides the ability to enable/disable logging for debugging purposes. Use this setting in conjunction with setMinimumLogLevel(_:) Note this does not affect the setUsageReportingEnabled(_:) property.
+///
+/// Logging is enabled by default.
+///
+/// \param enabled <code>true
+/// </code> prints logging information to the console, <code>false
+/// </code> disables logging.
+- (void)setLoggingEnabled:(BOOL)enabled;
 
 /// Disable / Enable usage reporting. Storie collects usage logging information of this SDK in order to improve the product and debug potential issues remotely. By default this setting is enabled. Any data sent to our logging platform is not able to personally identify users.
 ///
