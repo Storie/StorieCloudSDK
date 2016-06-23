@@ -124,12 +124,37 @@ class ViewController: UIViewController {
     }
 
     final func upload(fileURL: NSURL) {
-        do {
-            try distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: ["storyID" : "1233454"])
-            view.setNeedsLayout()
-        } catch let error {
-            print("Error uploading video at URL: \(fileURL) : \(error)")
+        distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: ["storyID" : "1233454"]) { [weak self] success in
+            do {
+                try success()
+            } catch let error as UploadError {
+                self?.handleError(error)
+            } catch let error {
+                print("Error uploading file: \(error)")
+            }
         }
+        view.setNeedsLayout()
+    }
+    
+    private func handleError(error: UploadError) {
+        var alertMessage = ""
+        switch error {
+        case UploadError.InvalidFilePath:
+            alertMessage = "Invalid path to video file."
+        case UploadError.UploadAlreadyUploaded:
+            alertMessage = "File already uploaded"
+        case UploadError.UploadAuthenticationError(let message, _):
+            alertMessage = message
+        case UploadError.UploadServerError(let message, _):
+            alertMessage = message
+        default:
+            alertMessage = "\(error)"
+        }
+        let alert = UIAlertController(title: "Error uploading file", message: alertMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: {[weak self] _ in
+            self?.dismissViewControllerAnimated(true, completion: nil)})
+        )
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     final func requestVideoID() {

@@ -100,6 +100,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 enum LogLevel : NSInteger;
 @class NSURL;
+@class NSError;
 @protocol DistributorDelegate;
 
 
@@ -196,6 +197,8 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 
 /// Instructs the SDK to create and start uploading a file to the Storie API. mp4 and mov file types are supported for now.
 ///
+/// Note: This is for Objective-C compatibility.
+///
 /// \param fileURL the location on local disk of the file you would like to upload
 ///
 /// \param userInfo passthrough dictionary, provided back via <code>DistributorDelegate
@@ -214,10 +217,10 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 /// \param thumbnailTime Override the default thumbnail time in the profile, use <code>DBL_MAX
 /// </code> if you want generation of thumbnails to be specified by the profile. Note: if the time is invalid e.g. greater than the duration of the video, the default thumbnail time specified in the profile will be used.
 ///
-/// \param error <code>UploadError.InvalidFilePath
-/// </code> if the <code>fileURL
-/// </code> parameter points to an invalid file path or the file does not exist
-- (BOOL)upload:(NSURL * _Nonnull)fileURL userInfo:(NSDictionary<NSString *, id> * _Nullable)userInfo callbackData:(NSDictionary<NSString *, NSString *> * _Nullable)callbackData serviceName:(NSString * _Nullable)serviceName thumbnailTime:(NSTimeInterval)thumbnailTime error:(NSError * _Nullable * _Null_unspecified)error;
+/// \param onError if an error occurred as a result of communicating with the Storie Cloud API this closure will be called
+///
+/// \param onUploadInitialized the upload has initialized successfully and will begin uploading
+- (void)upload:(NSURL * _Nonnull)fileURL userInfo:(NSDictionary<NSString *, id> * _Nullable)userInfo callbackData:(NSDictionary<NSString *, NSString *> * _Nullable)callbackData serviceName:(NSString * _Nullable)serviceName thumbnailTime:(NSTimeInterval)thumbnailTime onError:(void (^ _Nonnull)(NSError * _Nonnull error))onError onUploadInitialized:(void (^ _Nonnull)(void))onUploadInitialized;
 
 /// Objective-C Compatible function that retrieves the object's metadata, if using Swift rather use: videoInfo(videoID: String, success: Video -> Void) throws Since Objective-C does not support Swift value types, this method is here to allow for Objective-C to be able to access it. The functions access identical functionality.
 ///
@@ -231,7 +234,6 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 @end
 
 @class NSProgress;
-@class NSError;
 @class UploadCompleteResult;
 
 

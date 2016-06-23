@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 @import MobileCoreServices;
+@import distribute;
 
 @interface ViewController () <DistributorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -145,13 +146,27 @@
 }
 
 - (void) upload:(NSURL *) fileURL {
-    NSError *error;
+    __weak typeof(self) weakSelf = self;
     [_distributor upload:fileURL
                 userInfo:@{@"localVideoID" : @"12345677"}
             callbackData:@{@"serverID" : @"4lkj344"}
-            serviceName:nil
+             serviceName: nil
            thumbnailTime:0.3
-                   error:&error];
+                 onError:^(NSError *error){
+                     NSString *reason = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle: @"Error uploading video"
+                                                                                    message: reason
+                                                                             preferredStyle: UIAlertControllerStyleAlert];
+                     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Dismiss"
+                                                                            style:UIAlertActionStyleDefault
+                                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                                              [weakSelf dismissViewControllerAnimated:true completion:nil];
+                                                                          }];
+                     [alert addAction:cancelAction];
+                     [weakSelf presentViewController:alert animated:true completion:nil];
+                 } onUploadInitialized: ^{
+                     NSLog(@"Upload initialized successfully.");
+                 }];
 }
 
 - (void) requestVideoID {

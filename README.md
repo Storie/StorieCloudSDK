@@ -113,7 +113,11 @@ NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.
         callbackData:@{@"serverObjectID" : @"12345677"}
         serviceName: @"DEFAULT"
         thumbnailTime:0.3
-               error:&error];
+              onError:^(NSError *error){
+            NSLog(@"Error initializing upload: %@", error);
+        }  onUploadInitialized: ^{
+            NSLog(@"Upload initialized successfully.");
+        }];
 ```
 
 ### Tracking upload progress
