@@ -32,16 +32,18 @@ You can also view our example apps in both Swift and Objective-C in this project
 To use [CocoaPods](https://cocoapods.org) just add this to your Podfile:
 
 ``` Ruby
-pod "distribute"
+pod 'StorieCloudSDK'
 ```
 
 Then run `pod install`
 
 ## Setup
 
+The StorieCloudSDK distribution module is called `distribute`.
+
 ### Swift:
 
-Add this near the top of your `AppDelegate.swift` to be able to use Storie's Distribute SDK
+Add this near the top of your `AppDelegate.swift` to be able to use Storie's Cloud SDK
 
 ``` Swift
 import distribute
@@ -62,7 +64,7 @@ For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/Distribut
 
 ### Objective-C:
 
-Add this near the top of your `AppDelegate.m` to be able to use Storie's Distribute SDK
+Add this near the top of your `AppDelegate.m` to be able to use Storie's Cloud SDK
 
 ``` Objective-C
 @import distribute;
