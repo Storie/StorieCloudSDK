@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'git@github.com:Storie/pods.git'
 
 # Uncomment this line to define a global platform for your project
  platform :ios, '8.0'
