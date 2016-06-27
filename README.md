@@ -90,7 +90,7 @@ For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/Distribut
 
 ### Uploading a video file:
 
-The Storie SDK supports both Quicktime and MPEG-4 video files. The following will start a new upload to the Storie API:
+The Storie SDK supports both Quicktime and MPEG-4 video files only. The following will start a new upload to the Storie API:
 
 In Swift:
 
