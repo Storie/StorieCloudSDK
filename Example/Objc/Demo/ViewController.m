@@ -9,7 +9,9 @@
 #import "ViewController.h"
 
 @import MobileCoreServices;
+@import AVKit;
 @import distribute;
+@import AVFoundation;
 
 @interface ViewController () <DistributorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) UIButton *cancelAllButton;
 @property (nonatomic, strong) UIButton *getVideoInfoButton;
 
+@property (nonnull, strong) NSMutableDictionary *waitingTimers;
+
 @end
 
 @implementation ViewController
@@ -31,6 +35,7 @@
     self = [self init];
     if (self) {
         self.distributor = distributor;
+        self.waitingTimers = [[NSMutableDictionary alloc] init];
         self.distributor.delegate = self;
         [self initializeViews];
     }
@@ -89,7 +94,7 @@
     [_cancelAllButton setTitle:@"Cancel All" forState:UIControlStateNormal];
     [_cancelAllButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
-    [_getVideoInfoButton setTitle:@"Get Video Info" forState:UIControlStateNormal];
+    [_getVideoInfoButton setTitle:@"Play Video" forState:UIControlStateNormal];
     [_getVideoInfoButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 }
 
@@ -150,7 +155,7 @@
     [_distributor upload:fileURL
                 userInfo:@{@"localVideoID" : @"12345677"}
             callbackData:@{@"serverID" : @"4lkj344"}
-             serviceName: nil
+             serviceName: @"$DEFAULT"
            thumbnailTime:0.3
                  onError:^(NSError *error){
                      NSString *reason = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
@@ -170,7 +175,7 @@
 }
 
 - (void) requestVideoID {
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Video Object ID" message:@"Please provide a video objectID to get the video's status" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Video Object ID" message:@"Provide your video's objectID to start playing when it is ready." preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(self) weakSelf = self;
     
@@ -180,14 +185,7 @@
             [weakSelf dismissViewControllerAnimated:true completion:nil];
             return;
         }
-        __strong typeof(self) strongSelf = weakSelf;
-        NSError *error;
-        [strongSelf.distributor getVideoInfo:text error:&error success:^(NSDictionary<NSString *,id> *result) {
-            [strongSelf appendToLog:[NSString stringWithFormat:@"Video found: %@", result]];
-        }];
-        if (error) {
-            [weakSelf appendToLog:[NSString stringWithFormat: @"Error requesting video ID: %@", error.localizedDescription]];
-        }
+        [weakSelf playVideoWhenPublished:text];
         [weakSelf dismissViewControllerAnimated:true completion:nil];
     }];
     
@@ -225,6 +223,93 @@
     NSLog(@"URL to video: %@", url);
     [self upload:url];
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+#pragma mark -
+#pragma mark Play Video When/If Published
+
+- (void) getVideoStatus:(NSString *) objectID callback:(void (^)(BOOL finished,  NSURL * _Nullable url)) callback {
+    NSError *error = nil;
+    [self.distributor getVideoInfo:objectID error:&error success:^(NSDictionary<NSString *,id> *result) {
+        NSString *status = [result objectForKey:@"status"];
+        if ([status isEqualToString:@"draft"]) {
+            [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ still needs to complete uploading.", [NSDate date], objectID]];
+            callback(NO, nil);
+            return;
+        }
+        
+        if ([status isEqualToString:@"processing"]) {
+            [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ processing.", [NSDate date], objectID]];
+            callback(NO, nil);
+            return;
+        }
+        
+        if ([status isEqualToString:@"published"]) {
+            [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ publishing. Attempting to play...", [NSDate date], objectID]];
+            NSString *playbackURLString = [result objectForKey:@"url"];
+            NSURL *playbackURL = [NSURL URLWithString:playbackURLString];
+            callback(YES, playbackURL);
+            return;
+        }
+        
+        if ([status isEqualToString:@"error"]) {
+            [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ has an error.", [NSDate date], objectID]];
+            [self appendToLog:[NSString stringWithFormat: @"Video details: %@", result]];
+            callback(YES, nil);
+            return;
+        }
+        
+        if ([status isEqualToString:@"deleted"]) {
+            [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ still needs to complete uploading.", [NSDate date], objectID]];
+            [self appendToLog:[NSString stringWithFormat: @"Video details: %@", result]];
+            callback(YES, nil);
+            return;
+        }
+    }];
+}
+
+- (void) playVideoWhenPublished:(NSString *) objectID {
+     __weak typeof(self) weakSelf = self;
+    [self getVideoStatus:objectID callback:^(BOOL finished, NSURL * _Nullable url) {
+        if (!finished) {
+            if ([self.waitingTimers objectForKey:objectID]) {
+                return;
+            }
+            [weakSelf addTimer:objectID];
+            return;
+        }
+        [self playVideo:url];
+        [[self.waitingTimers objectForKey:objectID] invalidate];
+        [self.waitingTimers removeObjectForKey:objectID];
+    }];
+}
+
+- (void) checkVideoStatus:(NSTimer *) timer {
+    NSString *objectID = [[timer userInfo] objectForKey:@"objectID"];
+    if (!objectID) {
+        return;
+    }
+    [self playVideoWhenPublished:objectID];
+}
+
+- (void) addTimer:(NSString *) objectID {
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(checkVideoStatus:)
+                                                    userInfo:@{@"objectID" : objectID}
+                                                     repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    [_waitingTimers setObject:timer forKey:objectID];
+}
+
+- (void) playVideo:(NSURL *) url {
+    if (!url) {
+        return;
+    }
+    AVPlayerViewController *viewController = [[AVPlayerViewController alloc] init];
+    AVPlayer *player = [[AVPlayer alloc] initWithURL: url];
+    viewController.player = player;
+    [self presentViewController:viewController animated:true completion:^{
+        [player play];
+    }];
 }
 
 #pragma mark -

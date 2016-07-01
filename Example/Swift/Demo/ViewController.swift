@@ -11,6 +11,7 @@ import distribute
 import AVFoundation
 import MediaPlayer
 import MobileCoreServices
+import AVKit
 
 class ViewController: UIViewController {
     
@@ -22,6 +23,8 @@ class ViewController: UIViewController {
     let pauseButton = UIButton()
     let cancelAllButton = UIButton()
     let getVideoInfoButton = UIButton()
+    
+    private var waitingTimers = [String: NSTimer]()
     
     init(distributor: Distributor) {
         self.distributor = distributor
@@ -71,7 +74,7 @@ class ViewController: UIViewController {
         cancelAllButton.setTitle("Cancel All", forState: .Normal)
         cancelAllButton.setTitleColor(UIColor.redColor(), forState: .Normal)
         
-        getVideoInfoButton.setTitle("Get Video Info", forState: .Normal)
+        getVideoInfoButton.setTitle("Play Video", forState: .Normal)
         getVideoInfoButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
     }
     
@@ -124,7 +127,7 @@ class ViewController: UIViewController {
     }
 
     final func upload(fileURL: NSURL) {
-        distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: ["storyID" : "1233454"]) { [weak self] success in
+        distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: [:], serviceName: "$DEFAULT") { [weak self] success in
             do {
                 try success()
             } catch let error as UploadError {
@@ -159,23 +162,17 @@ class ViewController: UIViewController {
     
     final func requestVideoID() {
         let controller = UIAlertController(title: "Video Object ID",
-                                           message: "Please provide a video object ID to get the video's status",
+                                           message: "Provide your video's objectID to start playing when it is ready.",
                                            preferredStyle: .Alert)
         
-        let confirmAction = UIAlertAction(title: "Get Details", style: UIAlertActionStyle.Default) { [weak self] action in
+        let confirmAction = UIAlertAction(title: "Play Video", style: UIAlertActionStyle.Default) { [weak self] action in
             defer {
                 self?.dismissViewControllerAnimated(true, completion: nil)
             }
             guard let videoID = controller.textFields?.first?.text where videoID.isEmpty == false else {
                 return
             }
-            do {
-                try self?.distributor.videoInfo(videoID) { video in
-                    self?.appendToLog("Video found: \(video.videoID) - status: \(video.status?.rawValue ?? String("Unknown"))")
-                }
-            } catch let error {
-                self?.appendToLog("Error getting video: \(error)")
-            }
+            self?.playVideoWhenPublished(videoID)
         }
         
         let cancelAction = UIAlertAction(title: "Dismiss", style: .Default) { [weak self] _ in
@@ -220,6 +217,89 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     
     final func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+//MARK: -
+//MARK: Play video when/if published
+extension ViewController {
+    
+    private func getVideoStatus(objectID: String, callback: (finished: Bool, url: NSURL?) -> Void) {
+        do {
+            try distributor.videoInfo(objectID) { [weak self] video in
+                guard let status = video.status else {
+                    return
+                }
+                let time = NSDate()
+                switch status {
+                case .Draft:
+                    self?.appendToLog("\(time) : Video \(objectID) still needs to complete uploading.")
+                    callback(finished: false, url: nil)
+                case .Processing:
+                    self?.appendToLog("\(time) : Video \(objectID) processing")
+                    callback(finished: false, url: nil)
+                case .Published:
+                    self?.appendToLog("\(time) : Video \(objectID) published. Attempting to play...")
+                    self?.appendToLog("Video details: \(video.videoID)")
+                    callback(finished: true, url: video.url)
+                case .Error:
+                    self?.appendToLog("\(time) : Video \(objectID) has an error: \(video.dictionary)")
+                    self?.appendToLog("Video details: \(video.videoID)")
+                    callback(finished: true, url: nil)
+                case .Deleted:
+                    self?.appendToLog("\(time) : Video \(objectID) deleted unable to play.")
+                    self?.appendToLog("Video details: \(video.dictionary)")
+                    callback(finished: true, url: nil)
+                }
+            }
+        } catch let error {
+            appendToLog("Error getting video: \(error)")
+            callback(finished: true, url: nil)
+        }
+    }
+    
+    func playVideoWhenPublished(objectID: String) {
+        getVideoStatus(objectID) { [weak self] finished, url in
+            if !finished {
+                if let _ = self?.waitingTimers[objectID] { //do nothing we already have a timer
+                    return
+                }
+                self?.addTimer(objectID)
+                return
+            }
+            self?.playVideo(url)
+            self?.waitingTimers[objectID]?.invalidate()
+            self?.waitingTimers[objectID] = nil
+        }
+    }
+    
+    func checkVideoStatus(timer: NSTimer) {
+        guard let objectID = timer.userInfo?["objectID"] as? String else {
+            print("Unable to check video status as userInfo does not include `objectID`")
+            return
+        }
+        playVideoWhenPublished(objectID)
+    }
+    
+    func addTimer(objectID: String) {
+        let newTimer = NSTimer(timeInterval: 10, target: self,
+                               selector: #selector(ViewController.checkVideoStatus(_:)),
+                               userInfo: ["objectID" : objectID],
+                               repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(newTimer, forMode: NSDefaultRunLoopMode)
+        waitingTimers[objectID] = newTimer
+    }
+    
+    func playVideo(url: NSURL?) {
+        guard let url = url else {
+            return
+        }
+        let viewController = AVPlayerViewController()
+        let player = AVPlayer(URL: url)
+        viewController.player = player
+        presentViewController(viewController, animated: true, completion: {
+            viewController.player?.play()
+        })
     }
 }
 
