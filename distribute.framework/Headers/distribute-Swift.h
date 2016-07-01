@@ -197,7 +197,7 @@ SWIFT_CLASS("_TtC10distribute11Distributor")
 
 /// Instructs the SDK to create and start uploading a file to the Storie API. mp4 and mov file types are supported for now.
 ///
-/// Note: This is for Objective-C compatibility.
+/// Note: This uses a different callback pattern in order to support Objective-C functionality.
 ///
 /// \param fileURL the location on local disk of the file you would like to upload
 ///

@@ -262,7 +262,7 @@ extension ViewController : DistributorDelegate {
     func uploadsCompleted(results: [UploadCompleteResult]) {
         appendToLog("\n\n******* Upload Summary *******\n")
         for result in results {
-            appendToLog("Upload result for: \(result.objectID) - \(result.result) - metadata: \(result.userInfo ?? [:]).")
+            appendToLog("Upload result for: \(result.objectID) - \(result.result.description()) - metadata: \(result.userInfo ?? [:]).")
         }
         appendToLog("\n************************************************")
     }
