@@ -1,13 +1,32 @@
-# Storie Distribution SDK
+# Storie Cloud SDK
 
-The Storie Distribution SDK provides a simple interface to interact with the Storie Cloud Video Processing API. In order to play to large video files over the Internet, Apple *strongly recommends* using HTTP Live Streaming (HLS). Setting up a fully fledged HLS transcoding service is costly and time consuming. Storie's Cloud API is designed to simplify this process, including delivery of your video object to our cloud storage service, fully customizable adaptive bit-rate streaming and support for true resumeable background uploads. _Never buffer again_ with only a few lines of code.
+The Storie Cloud SDK provides a simple interface to interact with the Storie Cloud API. 
 
-## Features
+## Features of the Storie Cloud API
 
-* **Simple:** The SDK is designed to be as simple as possible to integrate in your development infrastructure.
-* **Mobile-focussed:** Designed from the ground up to be deployed in a mobile environment.
-* **Scalable:** Our cloud processing API is designed to scale horizontally.
-* **Flexible:** Our API is based on a flexible service architecture made up of processing tasks.
+### **Stream Video**:
+
+In order to play to large video files over the Internet, Apple *strongly recommends* using HTTP Live Streaming (HLS). Setting up a fully fledged HLS transcoding service is costly and time consuming. Storie's Cloud API is designed to simplify this process, including delivery of your video object to our cloud storage service, fully customizable adaptive bit-rate streaming and support for true resumeable background uploads. _Never buffer again_ with only a few lines of code.
+
+### **Upload Video**:
+
+We've developed a propietary transfer mechanism for mobile video and added it to our SDK. Uploads are resumed automatically, can run in the background and are guaranteed delivery.
+
+### **Transform Video**:
+
+Storie Cloud supports multiple transformation tools for your videos. We provide conversion to a high-performance, adaptive-bitrate video stream (HLS & MPEG-DASH), or animated GIFs or video manipulation, all from our developer console. Take control of your videos, ready for analysis, distribution and storage.
+
+### **Analyze Video**:
+
+Extract keywords, locations, text and trademarks. Recognize faces, emotions and demographics. StorieCloud provides a powerful and highly accurate set of video analysis tools.
+
+### **Distribute Video**:
+
+Our flexible callback architecture is designed to deliver feedback to your own server infrastructure, ready to be distributed to your users over a high performance Content Delivery Network.
+
+### **Store Video**:
+
+Running a fully-redundant, cloud storage infrastructure for video is complex. Based on Google Cloud Storage, we've put together a combination of both low access latency and full redundancy, so that your data is both safe and fully accessible at any time, all at a very low cost.
 
 We built this infrastucture for our own app in the AppStore and its worked out so well (tested on over 100 000 videos), we wanted to make it available to other developers too.
 
