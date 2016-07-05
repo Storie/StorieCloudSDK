@@ -14,11 +14,11 @@ We've developed a propietary transfer mechanism for mobile video and added it to
 
 ### **Transform Video**:
 
-Storie Cloud supports multiple transformation tools for your videos. We provide conversion to a high-performance, adaptive-bitrate video stream (HLS & MPEG-DASH), or animated GIFs or video manipulation, all from our developer console. Take control of your videos, ready for analysis, distribution and storage.
+Storie Cloud supports multiple transformation tools for your videos. We provide conversion to a high-performance, *adaptive-bitrate video stream* (HLS & MPEG-DASH), or *animated GIFs* or video manipulation, all from our developer console. Take control of your videos, ready for analysis, distribution and storage.
 
 ### **Analyze Video**:
 
-Extract keywords, locations, text and trademarks. Recognize faces, emotions and demographics. StorieCloud provides a powerful and highly accurate set of video analysis tools.
+Extract keywords, locations, text and trademarks. Recognize faces, emotions and demographics. StorieCloud provides a powerful and highly accurate set of video analysis tools. Use our safe search analysis tool to notify you of explicit content.
 
 ### **Distribute Video**:
 
