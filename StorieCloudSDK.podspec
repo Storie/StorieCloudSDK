@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name = "StorieCloudSDK"
-spec.version = "0.1.5"
+spec.version = "0.1.6"
 spec.summary = "Storie Cloud SDK for uploading & converting video files to streamable formats using the Storie Cloud API"
 spec.homepage = "https://api.storie.com"
 spec.license      = { :type => 'Commercial', :text => 'Please refer to https://github.com/Storie/StorieCloudSDK/blob/master/LICENSE'}
