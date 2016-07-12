@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import distribute
+import StorieCloudSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIWindow(frame: UIScreen.mainScreen().bounds)
     }()
     
-    private var distributor: Distributor?
+    private var storiePlatform: StoriePlatform?
     
     final func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Application did finish launching")
         
         //TODO: ADD YOUR API KEY TO THIS LINE
-        self.distributor = try? Distributor(apiKey: "")
-        distributor?.initializeUploads()
+        self.storiePlatform = try? StoriePlatform(apiKey: "m4h3o7cfyz6zg412wvmjmlyx4auocm")
+        storiePlatform?.initializeUploads()
 
-        let viewController = ViewController(distributor: distributor!)
+        let viewController = ViewController(storiePlatform: storiePlatform!)
         window?.rootViewController = viewController
         
         window?.backgroundColor = UIColor.whiteColor()
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Application is in the foreground, so ignore.")
             return
         }
-        distributor?.handleEventsForBackgroundSession(identifier, completionHandler: completionHandler)
+        storiePlatform?.handleEventsForBackgroundSession(identifier, completionHandler: completionHandler)
     }
 }
 

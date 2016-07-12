@@ -60,51 +60,49 @@ Then run `pod install`
 
 ## Setup
 
-The StorieCloudSDK distribution module is called `distribute`.
-
 ### Swift:
 
 Add this near the top of your `AppDelegate.swift` to be able to use Storie's Cloud SDK
 
 ``` Swift
-import distribute
+import StorieCloudSDK
 ```
 
-Then add a property to your `AppDelegate.swift` to store your `Distributor` object:
+Then add a property to your `AppDelegate.swift` to store your `StoriePlatform` object:
 
 ``` Swift
-var distributor: Distributor?
+var storiePlatform: StoriePlatform?
 ```
 
-To initialize the `distributor` property add the following to the beginning of your `AppDelegate:didFinishLaunchingWithOptions()`. Contact us now for an API key at support@storie.com.
+To initialize the `storiePlatform` property add the following to the beginning of your `AppDelegate:didFinishLaunchingWithOptions()`. Contact us now for an API key at support@storie.com.
 
 ``` Swift
-self.distributor = try? Distributor(apiKey: "{API_KEY}")
+self.storiePlatform = try? StoriePlatform(apiKey: "{API_KEY}")
 ```
-For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/Distributor.html">Distributor documentation</a>.
+For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
 
 ### Objective-C:
 
 Add this near the top of your `AppDelegate.m` to be able to use Storie's Cloud SDK
 
 ``` Objective-C
-@import distribute;
+@import StorieCloudSDK;
 ```
 
-Then add a property to your `AppDelegate.m` to store your `Distributor` object as a property:
+Then add a property to your `AppDelegate.m` to store your `StoriePlatform` object as a property:
 
 ``` Objective-C
-@property (nonatomic, strong) Distributor *distributor;
+@property (nonatomic, strong) StoriePlatform *storiePlatform;
 ```
 
-To initialize the `distributor` property add the following to the beginning of your `[AppDelegate didFinishLaunchingWithOptions:]`. You will need to get your API_KEY from the Storie API developer's console:
+To initialize the `storiePlatform` property add the following to the beginning of your `[AppDelegate didFinishLaunchingWithOptions:]`. You will need to get your API_KEY from the Storie API developer's console:
 
 ``` Objective-C
 NSError *error;
-self.distributor = [[Distributor alloc] initWithApiKey:@"{API_KEY}" error:&error];
+self.storiePlatform = [[StoriePlatform alloc] initWithApiKey:@"{API_KEY}" error:&error];
 ```
 
-For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/Distributor.html">Distributor documentation</a>.
+For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
 
 ## Usage:
 
@@ -118,7 +116,7 @@ In Swift:
 ``` Swift
 let videoFileURL = = NSURL(fileURLWithPath: "file://path_to_my_file/to_upload.mp4")
 do {
-    try distributor.upload(videoFileURL, userInfo: ["localObjectID" : "12345566"],
+    try storiePlatform.upload(videoFileURL, userInfo: ["localObjectID" : "12345566"],
                                      callbackData: ["serverObjectID" : "1233454"]
                                       serviceName: @"DEFAULT")
 } catch let error {
@@ -131,7 +129,7 @@ In Objective-C:
 ``` Objective-C
 NSError *error;
 NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.mp4"];
-[distributor upload:videoFileURL
+[storiePlatform upload:videoFileURL
             userInfo:@{@"localObjectID" : @"12345677"}
         callbackData:@{@"serverObjectID" : @"12345677"}
         serviceName: @"DEFAULT"
@@ -145,10 +143,10 @@ NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.
 
 ### Tracking upload progress
 
-There are two ways to inspect the progress of an upload. The first is by implement the `DistributorDelegate` protocol and assigning it to your `Distributor` instance.
+There are two ways to inspect the progress of an upload. The first is by implement the `StoriePlatformDelegate` protocol and assigning it to your `StoriePlatform` instance.
 
 
-For more information about the callbacks you will receive via the `DistributorDelegate` visit: http://api.storie.com/docs/ios-sdk/Protocols/DistributorDelegate.html
+For more information about the callbacks you will receive via the `StoriePlatformDelegate` visit: http://api.storie.com/docs/ios-sdk/Protocols/StoriePlatformDelegate.html
 
 The second way is by registering `NSNotification` observers on `UploadNotifications`. For the available constants visit: http://api.storie.com/docs/ios-sdk/Structs/UploadNotifications.html
 
@@ -156,7 +154,7 @@ The second way is by registering `NSNotification` observers on `UploadNotificati
 In Objective-C, you will need to import:
 
 ``` Objective-C
-#import <distribute/ObjcConstants.h>
+#import <StorieCloudSDK/ObjcConstants.h>
 ```
 
 You will then have access to the following notification names and constants, they are identical in functionality to those specified in the `UploadNotifications` struct in Swift:
@@ -185,7 +183,7 @@ In Swift:
 
 ```Swift
 do {
-    try distributor.videoInfo(videoID) { video in
+    try storiePlatform.videoInfo(videoID) { video in
         NSLog("Video found: \(video.videoID) - status: \(video.status?.rawValue)")
     }
 } catch let error {
@@ -197,25 +195,25 @@ In Objective-C:
 
 ```Objective-C
 NSError *error;
-[distributor getVideoInfo: text error:&error success:^(NSDictionary<NSString *,id> *result) {
+[storiePlatform getVideoInfo: text error:&error success:^(NSDictionary<NSString *,id> *result) {
     NSLog(@"Video found: %@", result);
 }];
 ```
 
 ### Enabling Resumable Background Upload Functionality
 
-If you would like to automatically resume any failed or stopped downloads on startup, add the following to your `didFinishLaunchingWithOptions()` method after creating your distributor:
+If you would like to automatically resume any failed or stopped downloads on startup, add the following to your `didFinishLaunchingWithOptions()` method after creating the `StoriePlatform` instance:
 
 In Swift:
 
 ``` Swift
-distributor?.initializeUploads()
+storiePlatform?.initializeUploads()
 ```
 
 In Objective-C:
 
 ``` Objective-C
-[self.distributor initializeUploads];
+[self.storiePlatform initializeUploads];
 ```
 
 Lastly, in order to manage your apps background upload sessions correctly you will need to implement the application delegate method: `application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: Void->())` So that it looks like this:
@@ -227,7 +225,7 @@ final func application(application: UIApplication,
   handleEventsForBackgroundURLSession identifier: String,
   completionHandler: Void->()) {
     if application.applicationState == UIApplicationState.Active { return }
-    distributor?.handleEventsForBackgroundSession(identifier, completionHandler: completionHandler)
+    storiePlatform?.handleEventsForBackgroundSession(identifier, completionHandler: completionHandler)
 }
 ```
 
@@ -237,7 +235,7 @@ In Objective-C:
 - (void) application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier
    completionHandler:(void (^)())completionHandler {
     if (application.applicationState == UIApplicationStateActive) { return;}
-    [self.distributor handleEventsForBackgroundSession:identifier completionHandler:completionHandler];
+    [self.storiePlatform handleEventsForBackgroundSession:identifier completionHandler:completionHandler];
 }
 ```
 

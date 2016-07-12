@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name = "StorieCloudSDK"
-spec.version = "0.1.6"
+spec.version = "0.1.7"
 spec.summary = "Storie Cloud SDK for uploading & converting video files to streamable formats using the Storie Cloud API"
 spec.homepage = "https://api.storie.com"
 spec.license      = { :type => 'Commercial', :text => 'Please refer to https://github.com/Storie/StorieCloudSDK/blob/master/LICENSE'}
@@ -11,10 +11,10 @@ spec.documentation_url = "http://api.storie.com/docs/ios-sdk/index.html"
 spec.platform = :ios, "8"
 spec.requires_arc = true
 spec.source = { git: "https://github.com/Storie/StorieCloudSDK.git", tag: "v#{spec.version}", submodules: true }
-spec.source_files = "StorieCloudSDK/**/*.{h,m,swift}", "distribute.framework/Headers/*.h"
+spec.source_files = "StorieCloudSDK/**/*.{h,m,swift}", "StorieCloudSDK.framework/Headers/*.h"
 
-spec.ios.vendored_frameworks = "distribute.framework"
-spec.public_header_files = "distribute.framework/Headers/*.h"
+spec.ios.vendored_frameworks = "StorieCloudSDK.framework"
+spec.public_header_files = "StorieCloudSDK.framework/Headers/*.h"
 
 spec.dependency "Alamofire", "~> 3.3"
 spec.dependency "SwiftyJSON", "~> 2.3"

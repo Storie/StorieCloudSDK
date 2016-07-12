@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4C6528391D11631C00A3AD02 /* StorieCloudSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6528381D11631C00A3AD02 /* StorieCloudSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4CC5F77E1D1166C4001230FA /* distribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC5F77D1D1166C4001230FA /* distribute.framework */; };
+		4CB735ED1D34F5DC00393E4F /* StorieCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB735EC1D34F5DC00393E4F /* StorieCloudSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C6528351D11631C00A3AD02 /* StorieCloudSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorieCloudSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6528381D11631C00A3AD02 /* StorieCloudSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorieCloudSDK.h; sourceTree = "<group>"; };
 		4C65283A1D11631C00A3AD02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CC5F77D1D1166C4001230FA /* distribute.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = distribute.framework; sourceTree = SOURCE_ROOT; };
+		4CB735EC1D34F5DC00393E4F /* StorieCloudSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StorieCloudSDK.framework; sourceTree = SOURCE_ROOT; };
 		4CC5F77F1D1166CE001230FA /* StorieCloudSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = StorieCloudSDK.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -24,7 +24,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CC5F77E1D1166C4001230FA /* distribute.framework in Frameworks */,
+				4CB735ED1D34F5DC00393E4F /* StorieCloudSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 				4C6528381D11631C00A3AD02 /* StorieCloudSDK.h */,
 				4C65283A1D11631C00A3AD02 /* Info.plist */,
 				4CC5F77F1D1166CE001230FA /* StorieCloudSDK.podspec */,
-				4CC5F77D1D1166C4001230FA /* distribute.framework */,
+				4CB735EC1D34F5DC00393E4F /* StorieCloudSDK.framework */,
 			);
 			path = StorieCloudSDK;
 			sourceTree = "<group>";

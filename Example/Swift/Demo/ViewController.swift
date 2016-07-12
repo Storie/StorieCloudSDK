@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import distribute
+import StorieCloudSDK
 import AVFoundation
 import MediaPlayer
 import MobileCoreServices
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     let chooseVideoButton = UIButton()
     let progressBar = UIProgressView(progressViewStyle: UIProgressViewStyle.Bar)
     let progressLabel = UILabel()
-    let distributor: Distributor
+    let storiePlatform: StoriePlatform
     let logView = UITextView()
     let pauseButton = UIButton()
     let cancelAllButton = UIButton()
@@ -26,10 +26,10 @@ class ViewController: UIViewController {
     
     private var waitingTimers = [String: NSTimer]()
     
-    init(distributor: Distributor) {
-        self.distributor = distributor
+    init(storiePlatform: StoriePlatform) {
+        self.storiePlatform = storiePlatform
         super.init(nibName: nil, bundle: nil)
-        distributor.delegate = self
+        storiePlatform.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         progressBar.progressTintColor = UIColor.blueColor()
         progressBar.trackTintColor = UIColor.lightGrayColor()
         
-        let title = distributor.uploadsSuspended ? "Resume" : "Pause"
+        let title = storiePlatform.uploadsSuspended ? "Resume" : "Pause"
         pauseButton.setTitle(title, forState: .Normal)
         pauseButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         
@@ -116,18 +116,18 @@ class ViewController: UIViewController {
     }
     
     final func togglePause() {
-        distributor.uploadsSuspended ? distributor.resumeUploads() : distributor.suspendUploads()
-        let title = distributor.uploadsSuspended ? "Resume" : "Pause"
+        storiePlatform.uploadsSuspended ? storiePlatform.resumeUploads() : storiePlatform.suspendUploads()
+        let title = storiePlatform.uploadsSuspended ? "Resume" : "Pause"
         pauseButton.setTitle(title, forState: .Normal)
         view.setNeedsLayout()
     }
     
     final func cancelAll() {
-        distributor.cancelAll()
+        storiePlatform.cancelAll()
     }
 
     final func upload(fileURL: NSURL) {
-        distributor.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: [:], serviceName: "$DEFAULT") { [weak self] success in
+        storiePlatform.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: [:], serviceName: "$DEFAULT") { [weak self] success in
             do {
                 try success()
             } catch let error as UploadError {
@@ -226,7 +226,7 @@ extension ViewController {
     
     private func getVideoStatus(objectID: String, callback: (finished: Bool, url: NSURL?) -> Void) {
         do {
-            try distributor.videoInfo(objectID) { [weak self] video in
+            try storiePlatform.videoInfo(objectID) { [weak self] video in
                 guard let status = video.status else {
                     return
                 }
@@ -304,8 +304,8 @@ extension ViewController {
 }
 
 //MARK: -
-//MARK: DistributorDelegate implementation
-extension ViewController : DistributorDelegate {
+//MARK: StoriePlatformDelegate implementation
+extension ViewController : StoriePlatformDelegate {
     
     func uploadDidProgress(objectID: String, userInfo:[String: AnyObject]?, progress: NSProgress, totalProgress: NSProgress) {
         progressBar.setProgress(Float(totalProgress.fractionCompleted), animated: true)

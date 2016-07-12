@@ -9,11 +9,11 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 
-@import distribute;
+@import StorieCloudSDK;
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) Distributor *distributor;
+@property (nonatomic, strong) StoriePlatform *storiePlatform;
 
 @end
 
@@ -30,14 +30,14 @@
     NSError *error;
     
     //TODO: Add your API KEY to this function call below
-    self.distributor = [[Distributor alloc] initWithApiKey:@"" error:&error];
+    self.storiePlatform = [[StoriePlatform alloc] initWithApiKey:@"" error:&error];
     if (error) {
         NSLog(@"%@ Unable to create distributor due to: %@", error.localizedDescription, error.localizedFailureReason);
     }
     
-    [self.distributor initializeUploads];
+    [self.storiePlatform initializeUploads];
     
-    ViewController *viewController = [[ViewController alloc] initWithDistributor:self.distributor];
+    ViewController *viewController = [[ViewController alloc] initWithStoriePlatform:self.storiePlatform];
     
     self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
@@ -51,7 +51,7 @@
     if (application.applicationState == UIApplicationStateActive) {
         return;
     }
-    [self.distributor handleEventsForBackgroundSession:identifier completionHandler:completionHandler];
+    [self.storiePlatform handleEventsForBackgroundSession:identifier completionHandler:completionHandler];
 }
 
 @end

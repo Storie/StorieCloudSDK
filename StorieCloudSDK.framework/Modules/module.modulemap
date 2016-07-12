@@ -1,0 +1,10 @@
+framework module StorieCloudSDK {
+  umbrella header "StorieCloudSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module StorieCloudSDK.Swift {
+    header "StorieCloudSDK-Swift.h"
+}

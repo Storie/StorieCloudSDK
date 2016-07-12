@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@import distribute;
+@class StoriePlatform;
 
 @interface ViewController : UIViewController
 
-- (instancetype) initWithDistributor: (Distributor *) distributor;
+- (instancetype) initWithStoriePlatform: (StoriePlatform *) storiePlatform;
 
 @end
 

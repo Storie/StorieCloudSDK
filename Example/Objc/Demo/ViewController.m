@@ -10,12 +10,12 @@
 
 @import MobileCoreServices;
 @import AVKit;
-@import distribute;
+@import StorieCloudSDK;
 @import AVFoundation;
 
-@interface ViewController () <DistributorDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ViewController () <StoriePlatformDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) Distributor *distributor;
+@property (nonatomic, strong) StoriePlatform *storiePlatform;
 
 @property (nonatomic, strong) UIButton *chooseVideoButton;
 @property (nonatomic, strong) UIProgressView *progressBar;
@@ -31,12 +31,12 @@
 
 @implementation ViewController
 
-- (instancetype) initWithDistributor: (Distributor *) distributor {
+- (instancetype) initWithStoriePlatform:(StoriePlatform *)storiePlatform {
     self = [self init];
     if (self) {
-        self.distributor = distributor;
+        self.storiePlatform = storiePlatform;
         self.waitingTimers = [[NSMutableDictionary alloc] init];
-        self.distributor.delegate = self;
+        self.storiePlatform.delegate = self;
         [self initializeViews];
     }
     return self;
@@ -87,7 +87,7 @@
     _progressBar.progressTintColor = [UIColor blueColor];
     _progressBar.trackTintColor = [UIColor lightGrayColor];
     
-    NSString *title = _distributor.uploadsSuspended ? @"Resume" : @"Pause";
+    NSString *title = _storiePlatform.uploadsSuspended ? @"Resume" : @"Pause";
     [_pauseButton setTitle:title forState:UIControlStateNormal];
     [_pauseButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
@@ -140,19 +140,19 @@
 }
 
 - (void) togglePause {
-    _distributor.uploadsSuspended ? [_distributor resumeUploads] : [_distributor suspendUploads];
-    NSString *title = _distributor.uploadsSuspended ? @"Resume" : @"Pause";
+    _storiePlatform.uploadsSuspended ? [_storiePlatform resumeUploads] : [_storiePlatform suspendUploads];
+    NSString *title = _storiePlatform.uploadsSuspended ? @"Resume" : @"Pause";
     [_pauseButton setTitle:title forState:UIControlStateNormal];
     [self.view setNeedsLayout];
 }
 
 - (void) cancelAll {
-    [_distributor cancelAll];
+    [_storiePlatform cancelAll];
 }
 
 - (void) upload:(NSURL *) fileURL {
     __weak typeof(self) weakSelf = self;
-    [_distributor upload:fileURL
+    [_storiePlatform upload:fileURL
                 userInfo:@{@"localVideoID" : @"12345677"}
             callbackData:@{@"serverID" : @"4lkj344"}
              serviceName: @"$DEFAULT"
@@ -230,7 +230,7 @@
 
 - (void) getVideoStatus:(NSString *) objectID callback:(void (^)(BOOL finished,  NSURL * _Nullable url)) callback {
     NSError *error = nil;
-    [self.distributor getVideoInfo:objectID error:&error success:^(NSDictionary<NSString *,id> *result) {
+    [self.storiePlatform getVideoInfo:objectID error:&error success:^(NSDictionary<NSString *,id> *result) {
         NSString *status = [result objectForKey:@"status"];
         if ([status isEqualToString:@"draft"]) {
             [self appendToLog:[NSString stringWithFormat: @"%@ : Video %@ still needs to complete uploading.", [NSDate date], objectID]];
@@ -320,6 +320,9 @@
     [_progressBar setProgress:totalProgress.fractionCompleted animated:true];
     int roundedProgress = round(totalProgress.fractionCompleted * 100);
     _progressLabel.text = [NSString stringWithFormat:@"%d%%", roundedProgress];
+    if (roundedProgress % 10 == 0) {
+        [self appendToLog:[NSString stringWithFormat: @"%@ with metadata: %@ did progress: %d", objectID, userInfo, roundedProgress]];
+    }
     [_progressLabel sizeToFit];
     [self.view setNeedsLayout];
 }
