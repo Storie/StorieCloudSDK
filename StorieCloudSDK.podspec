@@ -22,6 +22,6 @@ spec.dependency "RxSwift", "~> 2.0"
 spec.dependency "RxCocoa", "~> 2.0"
 spec.dependency "Moya/RxSwift", "~> 6.4"
 spec.dependency "SwiftyBeaver", "~> 0.5"
-spec.dependency "FileMD5Hash", "~> 2.0"
+#spec.dependency "FileMD5Hash", "~> 2.0"
 
 end

@@ -2,7 +2,7 @@
 //  StorieCloudSDK.h
 //  StorieCloudSDK
 //
-//  Created by Michael Gaylord on 2016/05/13.
+//  Created by Michael Gaylord on 2016/07/21.
 //  Copyright © 2016 Storie. All rights reserved.
 //
 
@@ -14,4 +14,7 @@ FOUNDATION_EXPORT double StorieCloudSDKVersionNumber;
 //! Project version string for StorieCloudSDK.
 FOUNDATION_EXPORT const unsigned char StorieCloudSDKVersionString[];
 
+// In this header, you should import all the public headers of your framework using statements like #import <StorieCloudSDK/PublicHeader.h>
+
+#import <StorieCloudSDK/FileHash.h>
 #import <StorieCloudSDK/ObjcConstants.h>
