@@ -54,6 +54,7 @@ To use [CocoaPods](https://cocoapods.org) just add this to your Podfile:
 
 ``` Ruby
 pod 'StorieCloudSDK'
+pod 'StorieCloudSDK', git: 'https://github.com/Storie/StorieCloudSDK.git', branch: 'development-env'
 ```
 
 Then run `pod install`
