@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Application did finish launching")
         
         //TODO: ADD YOUR API KEY TO THIS LINE
-        self.storiePlatform = try? StoriePlatform(apiKey: "m4h3o7cfyz6zg412wvmjmlyx4auocm")
+        self.storiePlatform = try? StoriePlatform(apiKey: "")
         storiePlatform?.initializeUploads()
 
         let viewController = ViewController(storiePlatform: storiePlatform!)
