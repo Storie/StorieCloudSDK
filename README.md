@@ -40,11 +40,9 @@ You will also need an API key. We are still busy polishing our Developer Console
 
 ## Documentation
 
-Full SDK documentation can be found here: http://api.storie.com/docs/ios-sdk/index.html
+Full SDK documentation can be found here: http://api.storie.com/docs/ios-sdk/index.html or our platform documentation can be found at: https://storie-cloud-sdk.readme.io
 
 You can also view our example apps in both Swift and Objective-C in this project in the `/Example/` folder.
-
-If you would like to try out any of the Example projects, you can use the Cocoapods command: `pod try StorieCloudSDK`
 
 ## Getting Started:
 
