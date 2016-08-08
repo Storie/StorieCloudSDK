@@ -51,6 +51,7 @@ class ViewController: UIViewController {
         view.addSubview(getVideoInfoButton)
         
         logView.backgroundColor = UIColor.lightGrayColor()
+        logView.editable = false
     }
 
     override func viewWillAppear(animated: Bool) {

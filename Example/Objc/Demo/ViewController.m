@@ -71,6 +71,7 @@
     [self.view addSubview:_getVideoInfoButton];
     
     [_logView setBackgroundColor:[UIColor lightGrayColor]];
+    [_logView setEditable:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
