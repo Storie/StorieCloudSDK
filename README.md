@@ -1,6 +1,6 @@
 # Storie Cloud SDK
 
-The Storie Cloud SDK provides a simple interface to interact with the Storie Cloud API. 
+The Storie Cloud SDK provides a simple interface to interact with the Storie Cloud API. For more info and developer access to the Storie Cloud visit https://developer.storie.com
 
 ## Features of the Storie Cloud API
 
@@ -40,7 +40,7 @@ You will also need an API key. We are still busy polishing our Developer Console
 
 ## Documentation
 
-Full SDK documentation can be found here: https://developer.storie.com/docs/ios/index.html
+Storie Cloud API Documentation can be found at: https://storie-developers.readme.io/docs and SDK documentation can be found at: https://developer.storie.com/docs/ios/index.html
 
 You can also view our example apps in both Swift and Objective-C in this project in the `/Example/` folder.
 
