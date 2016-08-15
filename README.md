@@ -30,7 +30,7 @@ Running a fully-redundant, cloud storage infrastructure for video is complex. Ba
 
 We built this infrastucture for our own app in the AppStore and its worked out so well (tested on over 100 000 videos), we wanted to make it available to other developers too.
 
-For more information on our Cloud Video API, visit http://api.storie.com or to see it in action visit: http://www.storie.com
+For more information on our Cloud Video API, visit https://developer.storie.com or to see it in action visit: https://itunes.apple.com/us/app/storie-video-storytelling/id950300668?mt=8
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ You will also need an API key. We are still busy polishing our Developer Console
 
 ## Documentation
 
-Full SDK documentation can be found here: http://api.storie.com/docs/ios-sdk/index.html
+Full SDK documentation can be found here: https://developer.storie.com/docs/ios/index.html
 
 You can also view our example apps in both Swift and Objective-C in this project in the `/Example/` folder.
 
@@ -79,7 +79,7 @@ To initialize the `storiePlatform` property add the following to the beginning o
 ``` Swift
 self.storiePlatform = try? StoriePlatform(apiKey: "{API_KEY}")
 ```
-For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
+For more visit the <a href="https://developer.storie.com/docs/ios/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
 
 ### Objective-C:
 
@@ -102,7 +102,7 @@ NSError *error;
 self.storiePlatform = [[StoriePlatform alloc] initWithApiKey:@"{API_KEY}" error:&error];
 ```
 
-For more visit the <a href="http://api.storie.com/docs/ios-sdk/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
+For more visit the <a href="https://developer.storie.com/docs/ios/Classes/StoriePlatform.html">StoriePlatform documentation</a>.
 
 ## Usage:
 
@@ -146,9 +146,9 @@ NSURL *videoFileURL = [NSURL fileURLWithPath:@"file://path_to_my_file/to_upload.
 There are two ways to inspect the progress of an upload. The first is by implement the `StoriePlatformDelegate` protocol and assigning it to your `StoriePlatform` instance.
 
 
-For more information about the callbacks you will receive via the `StoriePlatformDelegate` visit: http://api.storie.com/docs/ios-sdk/Protocols/StoriePlatformDelegate.html
+For more information about the callbacks you will receive via the `StoriePlatformDelegate` visit: https://developer.storie.com/docs/ios/Protocols/StoriePlatformDelegate.html
 
-The second way is by registering `NSNotification` observers on `UploadNotifications`. For the available constants visit: http://api.storie.com/docs/ios-sdk/Structs/UploadNotifications.html
+The second way is by registering `NSNotification` observers on `UploadNotifications`. For the available constants visit: https://developer.storie.com/docs/ios/Structs/UploadNotifications.html
 
 
 In Objective-C, you will need to import:
