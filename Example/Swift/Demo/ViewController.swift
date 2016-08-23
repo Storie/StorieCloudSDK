@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,9 +51,8 @@ class ViewController: UIViewController {
         view.addSubview(getVideoInfoButton)
         
         logView.backgroundColor = UIColor.lightGrayColor()
-        logView.editable = false
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -77,6 +76,8 @@ class ViewController: UIViewController {
         
         getVideoInfoButton.setTitle("Play Video", forState: .Normal)
         getVideoInfoButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        
+        logView.editable = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,6 +108,11 @@ class ViewController: UIViewController {
     //MARK: Actions
     
     final func chooseVideo() {
+        
+        //        storiePlatform.createUser("gyftdemo", email: "mark@gyft.com", name: "Mark", password: "3L6$#rJchi-BtuAjP") { token in
+        //            print("Token created: \(token)")
+        //        }
+        
         let pickerController = UIImagePickerController()
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         pickerController.allowsEditing = true
@@ -126,9 +132,9 @@ class ViewController: UIViewController {
     final func cancelAll() {
         storiePlatform.cancelAll()
     }
-
+    
     final func upload(fileURL: NSURL) {
-        storiePlatform.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: [:], serviceName: "$DEFAULT") { [weak self] success in
+        storiePlatform.upload(fileURL, userInfo: ["storyID" : "12345566"], callbackData: [:], serviceName: "testing") { [weak self] success in
             do {
                 try success()
             } catch let error as UploadError {
@@ -242,6 +248,10 @@ extension ViewController {
                 case .Published:
                     self?.appendToLog("\(time) : Video \(objectID) published. Attempting to play...")
                     self?.appendToLog("Video details: \(video.videoID)")
+                    self?.appendToLog("Keywords: \(video.keywords)")
+                    self?.appendToLog("Safe for Search: \(video.safeForSearch)")
+                    self?.appendToLog("Streaming URL: \(video.url?.absoluteString ?? String("None"))")
+                    self?.appendToLog("Thumbnail URL: \(video.thumbnailURL ?? String("None"))")
                     callback(finished: true, url: video.url)
                 case .Error:
                     self?.appendToLog("\(time) : Video \(objectID) has an error: \(video.dictionary)")
@@ -305,7 +315,7 @@ extension ViewController {
 }
 
 //MARK: -
-//MARK: StoriePlatformDelegate implementation
+//MARK: DistributorDelegate implementation
 extension ViewController : StoriePlatformDelegate {
     
     func uploadDidProgress(objectID: String, userInfo:[String: AnyObject]?, progress: NSProgress, totalProgress: NSProgress) {
@@ -345,6 +355,11 @@ extension ViewController : StoriePlatformDelegate {
         for result in results {
             appendToLog("Upload result for: \(result.objectID) - \(result.result.description()) - metadata: \(result.userInfo ?? [:]).")
         }
+        appendToLog("\n************************************************")
+    }
+    func videoReady(video: [String : AnyObject]) {
+        appendToLog("\n\n******* Video Processing Complete *******\n")
+        appendToLog("\(video)")
         appendToLog("\n************************************************")
     }
     

@@ -329,6 +329,11 @@ SWIFT_PROTOCOL("_TtP14StorieCloudSDK22StoriePlatformDelegate_")
 
 /// When all current uploads have finished uploading and there are no pending uploads remaining.
 - (void)uploadsCompleted:(NSArray<UploadCompleteResult *> * _Nonnull)results;
+
+/// The service has finished processing the upload and it is now ready to be used, this notification is preserved between sessions
+///
+/// \param video a dictionary containing the properties for this video
+- (void)videoReady:(NSDictionary<NSString *, id> * _Nonnull)video;
 @end
 
 enum UploadResultConstant : NSInteger;
